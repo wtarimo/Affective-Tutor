@@ -1,0 +1,137 @@
+.now {
+    color: green;
+}
+
+body, html {
+  height: 100%;
+}
+
+.passed {
+    color: red;
+}
+
+.scheduled {
+    color: purple;
+}
+.studentMessage {
+	font-size:14px;
+   padding: 2px 5px 2px 5px;
+   color: #FFFF00;
+}
+.boredMessage {
+	font-size:14px;
+   padding: 2px 5px 2px 5px;
+   color: #21610B;
+}
+.confusedMessage {
+	font-size:14px;
+   padding: 2px 5px 2px 5px;
+   color: #FE2E2E;
+}
+.taMessage {
+	font-size:14px;
+   padding: 2px 5px 2px 5px;
+   color: #0101DF;
+}
+.msgContainerDiv {
+   overflow-y: scroll;
+   height: 100%;
+}
+.ui-li, .ui-li-aside, .ui-btn-inner, .ui-li-desc, .ui-li-heading, .ui-li-static.ui-li {
+  padding-right: 5px;
+  width: auto;
+}
+.button-span {
+    position: absolute;
+    right: 0;
+    margin-top: -7px !important;
+    margin-right:35px;
+}
+
+.ui-btn-text{
+    display: block;
+}
+
+.button-set {
+    float:right;
+    margin-top: 0px;
+}
+
+@media all and (max-width: 38em){
+  .ui-grid-a .ui-block-a,
+  .ui-grid-a .ui-block-b {
+    width: 100%;
+    clear: left;
+  }
+}
+.ui-li-static.ui-li {
+  padding: .5em 15px;
+  font-size: 13px;
+  font-weight: normal;
+}
+.ui-block-a.main { width: 92%; }
+.ui-block-b.side { width: 8%; margin-top: 7px;} 
+
+.ui-icon-iButton {
+  background-image: url("images/iResponder.png");
+  background-size: 18px 18px;
+}
+.ui-icon-show {
+  background-image: url("images/show.png");
+  background-size: 18px 18px;
+}
+.ui-icon-hide {
+  background-image: url("images/hide.png");
+  background-size: 18px 18px;
+}
+.ui-icon-iButtonX {
+  background-image: url("images/iResponderX.png");
+  background-size: 18px 18px;
+}
+.ui-icon-messagesX {
+  background-image: url("images/messagesX.png");
+  background-size: 18px 18px;
+}
+.ui-icon-messages {
+  background-image: url("images/messages.png");
+  background-size: 18px 18px;
+}
+.ui-icon-iLock {
+  background-image: url("images/iLock.png");
+  background-size: 18px 18px;
+}
+.ui-icon-iLockX {
+  background-image: url("images/iLockX.png");
+  background-size: 18px 18px;
+}
+.ui-icon-grade {
+  background-image: url("images/grade.png");
+  background-size: 18px 18px;
+}
+.ui-icon-chart {
+  background-image: url("images/chart.png");
+  background-size: 18px 18px;
+}
+.ui-icon-question {
+  background-image: url("images/question.png");
+  background-size: 18px 18px;
+}
+.ui-icon-correct {
+  background-image: url("images/right.png");
+  background-size: 18px 18px;
+}
+.ui-icon-incorrect {
+  background-image: url("images/wrong.png");
+  background-size: 18px 18px;
+}
+.ui-icon-anonymous {
+  background-image: url("images/anonymous.png");
+  background-size: 18px 18px;
+}
+.ui-icon-download {
+  background-image: url("images/download.png");
+  background-size: 18px 18px;
+}
+.anonymous{
+  color: #00FFBF !important;
+}

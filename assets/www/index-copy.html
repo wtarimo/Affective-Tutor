@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta http-equiv="pragma" content="no-cache">        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+        <meta http-equiv="expires" content="-1" />
+        <link rel="shortcut icon" href="http://moore.cs-i.brandeis.edu/at/misc/favicon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/gif" href="http://moore.cs-i.brandeis.edu/at/misc/animated_favicon1.gif" />
+        
+		<link rel="stylesheet"  href="./css/jquery.mobile-1.3.2.min.css">
+        <link rel="stylesheet"  href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css"> 
+        <script src="./js/jquery.js"></script>
+        <script src="./js/dateFormatting.js"></script>
+        <script type="text/javascript" src="./js/jQuery-Show-Password.min.js"></script>
+      
+        <script src="./js/jquery.mobile-1.3.2.min.js"></script>
+        <script src="./js/canvasjs.min.js"></script>
+        <script type="text/javascript" src="./js/index.js"></script>
+        <script src="./js/parse-1.2.9.min.js"></script>
+        <script src="./js/jquery.tmpl.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.core.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.calbox.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.flipbox.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.durationflipbox.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/i18n/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
+
+        <title>Affective Tutor-Assistant</title>
+    </head>
+
+    <script>
+		Parse.initialize("zNufjYlnIpyxeghvJd1iFUaZqjyBrwg0MRCaR9vk", "yHNLyBhUzD7f3LfDIBocINqxmcA9yvOmxxe4wmP4");
+    </script>
+
+    <body>
+        <div data-role="page" id="startPage">
+            <div data-role="header" data-position="inline"><h1>Affective Tutor-Assistant!</h1></div>
+            <div data-role="content"><h2>Welcome!</h2></div>
+            <div data-role="footer" data-position="fixed"><h1>Affective Tutor-Assistant!</h1></div>
+        </div>
+
+        <div data-role="page" id="testPage">
+            <div data-role="header" data-position="inline"><h1>Affective Tutor-Assistant!</h1></div>
+            <div data-role="content">
+                <h2>Welcome!</h2>
+                <div data-role="collapsible-set" id="postsCollapsibleSet" data-mini="true">
+
+                    <div data-role="collapsible" id="collapsible_postId" data-theme="a" data-collapsed-icon="alert" data-expanded-icon="arrow-u">
+                        <h2>Unresolved Question :Owner
+                            <span style="float:right;" class="button-span"> <input type='button' value='Resolved' id='postId' data-mini='true' onclick="AT.toggleResolved(event,this.id,'Resolved'); return false" data-inline='true' data-icon='check' data-icon-pos='top'/>
+                            </span>
+                            <span class="ui-btn-up-c" title="Responses" style="float:right;">142</span>
+                        </h2>
+                        <ul data-role="listview" id="listview_postId" >
+                            <li class="ui-body ui-body-b">
+                                <fieldset class="ui-grid-a">
+                                    <div class="ui-block-a main"><textarea rows='0' id="response_postId" value="" placeholder="New Response" data-theme="c"></textarea></div>
+                                    <div class="ui-block-b side"><button id="postId" data-icon="check" data-iconpos="notext" onclick="AT.submitResponse(this.id); return false" data-theme="b">Submit Response</button></div>
+                                </fieldset>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div data-role='collapsible' data-theme='a' data-collapsed-icon='alert' data-expanded-icon='arrow-u'>
+                        <h2>Unresolved Question
+                            <span class='ui-btn-up-c' title='Responses' style='float:right;'>142</span>
+                        </h2>
+                        <ul data-role='listview' >
+                            <li>Adam Kinkaid</li>
+                            <li>Alex Wickerham</li>
+                            <li>Avery Johnson</li>
+                            <li>Bob Cabot</li>
+                            <li>Caleb Booth</li>
+                        </ul>
+                    </div>
+
+                    <div data-role='collapsible' data-theme='b' data-collapsed-icon='check' data-expanded-icon='arrow-u'>
+                        <h2>Resolved Question :Owner
+                            <span style='float:right;' class='button-span'> <input type='button' value='Unresolved' id='unresolveButton' data-mini='true' onclick='AT.toggleResolved(event,this.id,'Unresolved'); return false' data-inline='true' data-icon='alert' data-icon-pos='top'/>
+                            </span>
+                            <span class='ui-btn-up-c' title='Responses' style='float:right;'>142</span>
+                        </h2>
+                        <ul data-role='listview' >
+                            <li>Adam Kinkaid</li>
+                            <li>Alex Wickerham</li>
+                            <li>Avery Johnson</li>
+                            <li>Bob Cabot</li>
+                            <li>Caleb Booth</li>
+                        </ul>
+                    </div>
+
+                    <div data-role='collapsible' data-theme='b' data-collapsed-icon='check' data-expanded-icon='arrow-u'>
+                        <h2>Resolved Question
+                            <span class='ui-btn-up-c' title='Responses' style='float:right;'>142</span>
+                        </h2>
+                        <ul data-role='listview' >
+                            <li>Adam Kinkaid</li>
+                            <li>Alex Wickerham</li>
+                            <li>Avery Johnson</li>
+                            <li>Bob Cabot</li>
+                            <li>Caleb Booth</li>
+                        </ul>
+                    </div>
+
+                    <div data-role='collapsible' data-theme='e' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>
+                        <h2>General Post<span class='ui-btn-up-c' title='Responses' style='float:right;'>684</span></h2>
+                        <ul data-role='listview' >
+                            <li >Adam Kinkaid</li>
+                            <li>Alex Wickerham</li>
+                            <li>Avery Johnson</li>
+                            <li>Bob Cabot</li>
+                            <li>Caleb Booth</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div data-role='footer' data-position='fixed'><h1>Affective Tutor-Assistant!</h1></div>
+        </div>
+
+
+        <div data-role="page" id="welcomePage">
+            <div data-role="header" style='height:36px' data-position="fixed" class="ui-bar">
+                <div align="center">
+                    <a href="#" data-role="button" id="logoutButton" data-theme='b' style="float:left; margin-top:5px; color:red" data-icon="delete">LogOut</a>
+                    <h1 style="margin-top:15px">Courses</h1>
+                    <a data-role="button" onclick="AT.refreshCourses();" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh Courses</a>
+                    <a href="#popupCreateClass" data-rel="popup" data-iconpos="notext" data-role="button" data-position-to="window" style="float:right;" data-icon="plus" data-theme="b" data-transition="flip">New Course</a>
+                </div>
+            </div>
+            
+            <div data-role="content" id="welcome_content">
+                <h2 id="welcome-heading" style="text-align: center; margin-top:0px; margin-bottom:0px;">Welcome!</h2>
+
+                <div data-role="popup" id="verifyEmail" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 20px; text-align:center; zindex:10000">
+                    <div>
+                        <h3>Please verify your School Email Address!</h3>
+                        <p>This will authenticate your identify within the application.
+                        <br>Please check the email that we have sent you regarding this!</p>
+                        <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="check">Okay, I got it!</a>
+                        <p>
+                        <p>Or ...</p>
+                        <textarea cols="30" name="emailV" data-clear-btn="true" id="emailV" value="" placeholder="School Email"></textarea>
+                        <button data-theme="b" onclick="AT.setEmail(emailV.value);" data-icon="check">Re-Send Verification Email</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="updateAccount" data-theme="a" data-dismissible="false" class="ui-corner-all" style="padding:10px 20px; text-align:center; z-index:10000">
+                    <div>
+                        <h3>We need to update your account and verify your school email!</h3>
+                        <p>This will authenticate your identify within the application.</p>
+                        <textarea cols="30" rows="1" data-clear-btn="true" name="fName" id="fName" value="" placeholder="First Name"></textarea>
+                        <textarea cols="30" rows="1" data-clear-btn="true" name="lName" id="lName" value="" placeholder="Last Name"></textarea>
+                        <textarea cols="30" rows="1" data-clear-btn="true" name="email11" id="email11" value="" placeholder="School Email"></textarea>
+                        <textarea cols="30" rows="1" data-clear-btn="true" name="email22" id="email22" value="" placeholder="Re-type Email"></textarea>
+                        <button data-theme="b" onclick="AT.updateAccount(fName.value,lName.valu,email11.value,email22.value);" data-icon="check">Update Account</button>
+                    </div>
+                </div>
+
+
+                <div data-role="popup" id="popupCreateClass" data-theme="a" class="ui-corner-all" style="padding:10px 20px; text-align:center; zindex:10000">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div>
+                            <h3>Enroll in Existing Course</h3>
+                            <input type="text" data-clear-btn="true" name="pin" id="pin" value="" placeholder="Assigned 7-digit PIN">
+                            <button id="addCourseButton" data-theme="b" data-icon="plus">Enroll</button>
+                        </div>
+                    </form>
+                    <form>
+                        <div>
+                            <h3>Or Create a New Course</h3>
+                            <input type="text" data-clear-btn="true" name="courseTitle" id="courseTitle" value="" placeholder="New Course Title">
+                            <input type="text" data-clear-btn="true" name="courseNumber" id="courseNumber" value="" placeholder="Course #/Code">
+                            <input name="lectureTime" placeholder="Lecture startTime" id="lectureTime1" type="date" data-role="datebox" data-options ='{"mode": "timeflipbox", "zindex":10000, "overrideTimeFormat": 24}'>
+                            <input name="lectureDuration" id="lectureDuration1" type="date" data-role="datebox" placeholder="Lecture Duration" data-options='{"mode": "durationflipbox", "zindex":10000, "overrideDurationOrder":["h","i"]}'>
+                            <input type="text" data-clear-btn="true" name="semester" id="semester" value="" placeholder="Semester">
+                            <textarea cols="30" rows="8" data-clear-btn="true" name="school" id="school" value="" placeholder="School Name"></textarea>
+                            <button id="createCourseButton" data-theme="b" data-icon="edit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <ul data-role="listview" data-split-icon="delete" data-inset="true" id="onGoingLectures" data-divider-theme="a">
+                </ul>
+
+                <ul data-role="listview" data-split-icon="delete" data-inset="true" id="recentCourses" data-divider-theme="a">
+                </ul>
+
+				<div data-role="popup" id="deleteCourse" style="max-width:400px; text-align:center;" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+				    <div data-role="header" class="ui-corner-top">
+				        <h1>Course Options</h1>
+				    </div>
+				    <div data-role="content" class="ui-corner-bottom ui-content">
+				        <h3 class="ui-title">Click Delete to remove from courses you're enrolled in?</h3>
+				        <p>You'll need a PIN to enroll again!</p>
+				        <a href="#" data-role="button" data-inline="true" data-theme="b" data-rel="back">Cancel</a>
+				        <a href="#" data-role="button" id="deleteCourseButton" data-theme="b" data-inline="true" data-transition="flow">Disenroll</a>
+				    </div>
+				</div>
+
+				<div data-role="popup" id="deleteCourse2" style="max-width:400px; text-align:center;" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+				    <div data-role="header" class="ui-corner-top">
+				        <h1>Course Options</h1>
+				    </div>
+				    <div data-role="content" class="ui-corner-bottom ui-content">
+				        <p> Click Delete to permanently delete the course globally - Caution: All lectures and related course data will be deleted for all enrolled users!</p>
+				        <a href="#" data-role="button" id="editCourseButton" data-theme="b" data-inline="true" data-icon="edit" data-transition="flow">Edit</a>
+				        <a href="#" data-role="button" id="deleteCourseButton3" data-theme="e" data-inline="true" style="color:red" data-icon="alert">Delete</a>
+				    </div>
+				</div>
+            </div>
+
+            <div data-role="popup" id="aboutPage" data-theme="a" class="ui-content" style="font-size:13px; text-align:center;">
+            	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+            	<h3>Affective Tutor-Assistant 0.6</h3>
+            	<p class="ui-li-aside">Release Date: 11/17/2013</p>
+	            <p>Affective Tutor-Assistant is part of a doctorate research in Educational Technology (EdTech) at Brandeis University. The research and this application are the works of <a href="mailto:wtarimo@brandeis.edu">William Tarimo</a> and <a href="mailto:tjhickey@brandeis.edu">Timothy Hickey</a>. <br>Copyright &copy; 2013 by William Tarimo &amp; Timothy Hickey. All rights reserved.</p>
+	        </div> 
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#aboutPage" data-rel="popup" data-transition="flip" data-inline="true" data-theme="b" data-role="button" data-icon="info">Affective Tutor-Assistant 0.6</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div data-role="page" id="coursePage">
+            <div data-role="header" style='height:36px' data-position="fixed" class="ui-bar">
+            	<div align="center">
+			    	<a href="#welcomePage" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-transition="flip" data-iconpos="notext" style="float:left">Courses</a>
+	            	<h1 style="margin-top:10px">Lectures!</h1>
+                    <a data-role="button" onclick="AT.refreshLectures();" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh Lectures</a>
+                    <a href="#popupCreateLecture" id="newLectureButton" data-rel="popup" data-iconpos="notext" data-role="button" data-position-to="window" style="float:right;" data-icon="plus" data-theme="b" data-transition="flip">New Lecture</a>
+		        </div>
+			</div>
+
+          
+            <div data-role="content" id="course_content"> 
+                <h2 id="Cwelcome-heading" style="text-align: center; margin-top:0px; margin-bottom:0px;"></h2>
+                <div data-role="popup" style="padding:10px 20px; zindex:10000; text-align:center" id="popupCreateLecture" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div>
+                            <h3>Create Lecture</h3>
+                            <input type="text" data-clear-btn="true" name="lectureTitle" data-theme="c" id="lectureTitle" value="" placeholder="Lecture Title">
+                            <input name="lectureDate" id="lectureDate" placeholder="Lecture Date" type="text" data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true,  "zindex":10000}'/>
+                            <input name="lectureTime" placeholder="Start Time" id="lectureTime" type="date" data-role="datebox" data-options ='{"mode": "timeflipbox", "zindex":10000, "overrideTimeFormat": 24}'>
+                            <input name="lectureDuration" id="lectureDuration" type="date" data-role="datebox" placeholder="Lecture Duration" data-options='{"mode": "durationflipbox", "zindex":10000, "overrideDurationOrder":["h","i"]}'>
+                            <textarea cols="40" rows="8" data-clear-btn="true" name="lectureInfo" data-theme="c" id="lectureInfo" value="" placeholder="Info (Optional!)"></textarea>
+                            <button id="createLectureButton" data-theme="b" data-icon="edit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div data-role="popup" style="padding:10px 20px; zindex:10000; text-align:center" id="popupEditLecture" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div>
+                            <h3>Edit Lecture</h3>
+                            <input type="text" data-clear-btn="true" name="lectureTitle" data-theme="c" id="lectureTitle11" value="" placeholder="Lecture Title">
+                            <input name="lectureDate" id="lectureDate11" placeholder="Lecture Date" type="text" data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true,  "zindex":10000}'/>
+                            <input name="lectureTime" placeholder="Start Time" id="lectureTime11" type="date" data-role="datebox" data-options ='{"mode": "timeflipbox", "zindex":10000, "overrideTimeFormat": 24}'>
+                            <input name="lectureDuration" id="lectureDuration11" type="date" data-role="datebox" placeholder="Lecture Duration" data-options='{"mode": "durationflipbox", "zindex":10000, "overrideDurationOrder":["h","i"]}'>
+                            <textarea cols="40" rows="8" name="lectureInfo" data-theme="c" id="lectureInfo11" value="" data-clear-btn="true" placeholder="Info (Optional!)"></textarea>
+                            <button id="editLecture" data-theme="b" data-icon="edit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <ul data-role="listview" data-count-theme="a" data-inset="true" id="recentLectures" data-divider-theme="a">
+                </ul>
+
+                <div data-role="popup" id="deleteLecture" data-transition="flip" style="max-width:400px; text-align:center;" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+				    <div data-role="header" class="ui-corner-top">
+				        <h1>Lecture Options</h1>
+				    </div>
+				    <div data-role="content" class="ui-corner-bottom ui-content">
+				        <p>Caution: Clicking Delete will permanently remove the lecture and all related data from the server.</p>
+                        <a href="#" data-role="button" id="editLectureButton" data-theme="b" data-inline="true" data-icon="edit" data-transition="flip">Edit</a>
+				        <a href="#" data-role="button" id="deleteLectureButton" data-theme="e" data-inline="true" data-icon="alert" style="color:red" data-transition="flip">Delete</a>
+				    </div>
+				</div>
+
+            </div>
+            <div data-role="popup" id="aboutPage" data-theme="a" class="ui-content" style="font-size:13px; text-align:center;">
+            	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+            	<h3>Affective Tutor-Assistant 0.6</h3>
+            	<p class="ui-li-aside">Release Date: 11/17/2013</p>
+	            <p>Affective Tutor-Assistant is part of a doctorate research in Educational Technology (EdTech) at Brandeis University. The research and this application are the works of <a href="mailto:wtarimo@brandeis.edu">William Tarimo</a> and <a href="mailto:tjhickey@brandeis.edu">Timothy Hickey</a>. <br>Copyright &copy; 2013 by William Tarimo &amp; Timothy Hickey. All rights reserved.</p>
+	        </div> 
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#aboutPage" data-rel="popup" data-transition="flip" data-inline="true" data-theme="b" data-role="button" data-icon="info">Affective Tutor-Assistant 0.6</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div data-role="page" id="loginPage">
+            <div data-role="header" data-position="fixed">
+            	<h1>Affective Tutor-Assistant!</h1>
+            </div>
+            
+            <div data-role="content" id="login_content"> 
+                <h2 style="text-align: center;">Welcome to <br>The Affective Tutor-Assistant!</h2>
+                <fieldset class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div style="text-align:center;">Existing User?</div>
+                        <div>
+                            <a href="#popupLogin" data-rel="popup" data-role="button" data-icon="check" data-theme="b" data-transition="flip">Sign In</a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div style="text-align: center;">New to the App?</div>
+                        <div>
+                            <a href="#popupSignup" data-rel="popup" data-role="button" data-icon="edit" data-theme="b" data-transition="flip">Sign Up</a>
+                        </div>
+                    </div>
+                </fieldset>
+                <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div style="padding:10px 20px; text-align:center;">
+                            <h3>Sign In</h3>
+                            <input type="text" data-clear-btn="true" name="username" id="username" value="" placeholder="Username (Not email)" data-theme="a">
+                            <input type="password" name="password" id="password" value="" placeholder="Password" data-theme="a">
+                            <button id="loginButton" data-theme="b" data-icon="check">Sign In</button>
+                            <a href="#popupReset" data-inline="true" data-rel="popup" data-transition="flip">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+                <div data-role="popup" id="popupReset" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div style="padding:10px 20px; text-align:center;">
+                            <h3>Email Address</h3>
+                            <input type="email" name="rEmail" id="rEmail" value="" placeholder="Account Email" data-theme="a">
+                            <button id="resetButton" data-theme="b" data-icon="check">Send Password Reset Link!</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div data-role="popup" id="loginAlert" class="ui-content" data-theme="e">
+                	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				    <p id="loginMessage" style='font-weight:bold'></p>
+				</div>
+                
+                <div data-role="popup" id="resetSuccessPopup" data-theme="e">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+				    <p style='font-weight:bold'>Success: Password reset link has been sent to your email!</p>
+				</div>
+
+                <div data-role="popup" id="popupSignup" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div style="padding:10px 20px; text-align:center;">
+                            <h3>Sign Up</h3>
+                            <textarea name="firstName" data-clear-btn="true" cols="30" rows="1" id="firstName" value="" placeholder="First Name" data-theme="a"></textarea>
+                            <textarea name="lastName" data-clear-btn="true" cols="30" rows="1" id="lastName" value="" placeholder="Last Name" data-theme="a"></textarea>
+                            <input type="text" data-clear-btn="true" name="username1" id="username1" value="" placeholder="Username" data-theme="a">
+                            <input type="email" name="email1" id="email1" value="" placeholder="School Email" data-theme="a">
+                            <input type="email" name="email2" id="email2" value="" placeholder="Re-enter Email" data-theme="a">
+                            <input type="password" name="password1" id="password1" value="" placeholder="Password" data-theme="a">
+                            <input type="password" name="password2" id="password2" value="" placeholder="Re-enter Password" data-theme="a">
+                            <button id="signupButton" data-theme="b" data-icon="check">Sign Up</button>
+                        </div>
+                    </form>
+                </div>  
+            </div>
+
+            <div data-role="popup" id="aboutPage" data-theme="a" class="ui-content" style="font-size:13px; text-align:center;">
+            	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+            	<h3>Affective Tutor-Assistant 0.6</h3>
+            	<p class="ui-li-aside">Release Date: 11/17/2013</p>
+	            <p>Affective Tutor-Assistant is part of a doctorate research in Educational Technology (EdTech) at Brandeis University. The research and this application are the works of <a href="mailto:wtarimo@brandeis.edu">William Tarimo</a> and <a href="mailto:tjhickey@brandeis.edu">Timothy Hickey</a>. <br>Copyright &copy; 2013 by William Tarimo &amp; Timothy Hickey. All rights reserved.</p>
+	        </div> 
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a href="#aboutPage" data-rel="popup" data-transition="flip" data-inline="true" data-theme="b" data-role="button" data-icon="info">Affective Tutor-Assistant 0.6</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div data-role="page" id="engagedPage">
+            <div data-role="header" id="header3" style='height:36px' data-position="fixed" class="ui-bar">
+            	<div align="center">
+	            	<a href="#coursePage" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-transition="flip" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+	            	<a href="#welcomePage" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-transition="flip" data-iconpos="notext" style="float:left">Courses</a>
+                    <a href="#iResponderPage" data-role="button" data-icon="iButton" data-theme="b" data-iconpos="notext" style="margin-left:5px; float:left">iResponder</a>
+	                <h1 style="margin-top:15px">I'm Engaged</h1>
+	                <a href="#engagedMessages" data-role="button" id="toggleMessages1" data-transition="flip" data-theme='e' style="float:right; margin-top:5px; margin-right:30px; color:green;" data-icon="messages">Show Messages</a>
+	                
+                </div>
+            </div>
+            
+            <div data-role="content" id="engagedContent">
+	            <div style="text-align: center; font-size:14px;">
+					<p>
+					<img src="img/app-icon.gif" alt="Affective Tutor-Assistant" />
+					<p>
+					<br>
+					<p>Now that you're engaged, you're expected to attempt to be so throughtout the lecture, pay attention to the instructor and other lecture proceedings. Occasionally when you get bored or confused, you can <strong>temporarily</strong> switch to the 'I'm Bored/Confused' states/tabs and see if you can help or get help from other students by posting or responding to questions, answers and comments.</p>
+					<br>
+				</div>
+				<div style="text-align: left; margin-left: 20px; font-size:13px;">
+					<p>Thanks for being engaged,<br>
+					<br>Affective Tutor-Assistant
+					<br>EdTech: Brandeis University<a href="#aboutPage" data-min="true" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="flip" data-icon="info" data-theme="e" data-iconpos="notext">Learn more</a></p>
+				</div>
+			</div>
+			<div data-role="popup" id="aboutPage" data-theme="e" class="ui-content" style="font-size:13px; text-align:center;">
+            	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+            	<h3>Affective Tutor-Assistant 0.6</h3>
+            	<p class="ui-li-aside">Release Date: 11/17/2013</p>
+	            <p>Affective Tutor-Assistant is part of a doctorate research in Educational Technology (EdTech) at Brandeis University. The research and this application are the works of <a href="mailto:wtarimo@brandeis.edu">William Tarimo</a> and <a href="mailto:tjhickey@brandeis.edu">Timothy Hickey</a>.<br>Copyright &copy; 2013 by William Tarimo &amp; Timothy Hickey. All rights reserved.</p>
+	        </div> 
+
+            <div data-role="footer" id="footer3" style="height:42px" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#engagedPage" data-transition="flip" style='color:green;' class="ui-btn-active ui-state-persist">I'm Engaged<strong id="engagedCount" style='float:right;'>0</strong></a></li>
+                        <li><a href="#boredPage" data-transition="flip">I'm Bored<strong id="boredCount" style='float:right;'>0</strong></a></li>
+                        <li><a href="#confusedPage" data-transition="flip">I'm Confused<strong id="confusedCount" style='float:right;'>0</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+         
+        </div>
+
+
+        <div data-role="page" id="engagedMessages">
+            <div data-role="header" id="header5" style='height:36px' data-position="fixed" class="ui-bar">
+            	<div align="center">
+	            	<a href="#coursePage" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-transition="flip" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+	            	<a href="#welcomePage" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-transition="flip" data-iconpos="notext" style="float:left">Courses</a>
+                    <a href="#iResponderPage" data-role="button" data-icon="iButton" data-theme="b" data-iconpos="notext" style="margin-left:5px; float:left">iResponder</a>
+	                <h1 style="margin-top:15px">I'm Engaged</h1>
+	                <a data-role="button" onclick="AT.refreshMessages('3'); return false" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px;" data-inline="true">Refresh</a>
+	                <a href="#engagedPage" data-role="button" id="toggleMessages1" data-transition="flip" data-direction="reverse" data-theme='e' style="float:right; color:red; margin-top:5px" data-icon="messagesX">Hide Messages</a>
+	                
+                </div>
+            </div>
+
+
+            <div data-role="content" id="mContent3"> 
+                <div id="incomingMessages3" name="incomingMessages" class="msgContainerDiv" ></div>
+            </div>
+            
+
+            <div data-role="footer" id="footer5" style="height:42px" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#engagedPage" data-transition="flip" style='color:green;' class="ui-btn-active ui-state-persist" >I'm Engaged<strong id="engagedCount3" style='float:right;'>0</strong></a></li>
+                        <li><a href="#boredPage" data-transition="flip">I'm Bored<strong id="boredCount3" style='float:right;'>0</strong></a></li>
+                        <li><a href="#confusedPage" data-transition="flip">I'm Confused<strong id="confusedCount3" style='float:right;'>0</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+         
+        </div>
+
+
+        <div data-role="page" id="boredPage">
+            <div data-role="header" id="header1" style='height:36px' data-position="fixed" class="ui-bar">
+            	<div align="center">
+	            	<a href="#coursePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+	            	<a href="#welcomePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-iconpos="notext" style="float:left">Courses</a>
+                    <a href="#iResponderPage" data-role="button" data-icon="iButton" data-theme="b" data-iconpos="notext" style="margin-left:5px; float:left">iResponder</a>
+	                <h1 style="margin-top:15px">I'm Bored</h1>
+	                <a data-role="button" onclick="AT.refreshMessages('1'); return false" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh</a>
+                </div>
+            </div>
+
+
+            <div data-role="content" id="mContent1"> 
+                <div id="incomingMessages1" name="incomingMessages" class="msgContainerDiv" ></div>
+
+                <div id="boredPopup" align="center" data-role="popup" data-overlay-theme="a" data-theme="e" data-dismissible="false" class="ui-content">
+                    <ul data-role="listview" data-icon="false" data-inset="true" data-divider-theme="e">
+                        <li data-role="list-divider" id="boredHello" style="text-align:center" data-theme='a'>Hello, Student!</li>
+                        <li data-role="list-divider" style="text-align:center">Are you still Bored?</li>
+                        <li style="font-weight:normal"><a href="#engagedPage" data-transition="flip" data-direction="reverse" style='color:green; font-size:14px'>No, Return to Engaged.</a></li>
+                        <li style="font-weight:normal"><a href="#boredPage" data-transition="flip" style='color:red; font-size:14px'>Yes, I'm responding to/posting queries.</a></li>
+                    </ul>
+
+                </div>
+                
+                <table id="messageInput1" style='width:100%'><tr>
+                    <td>
+                        <input type="text" data-clear-btn="true" id="messageText1" value = "" placeholder="New Message">
+                    </td>
+                    <td style='font-size:80%; width:1em'>
+                         <a data-role="button" id="sendMessageButton1" data-icon="check" data-theme="b" data-inline="true">Send</a>
+                    </td>
+                </tr></table>
+            </div>
+
+            <div data-role="footer" id="footer1" style="height:42px" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#engagedPage" data-transition="flip" data-direction="reverse">I'm Engaged<strong id="engagedCount1" style='float:right;'>0</strong></a></li>
+                        <li><a href="#boredPage" data-transition="flip" style='color:yellow;' class="ui-btn-active ui-state-persist">I'm Bored<strong id="boredCount1" style='float:right;'>0</strong></a></li>
+                        <li><a href="#confusedPage" data-transition="flip">I'm Confused<strong id="confusedCount1" style='float:right;'>0</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div data-role="page" id="confusedPage">
+            <div data-role="header" id="header2" style='height:36px' data-position="fixed" class="ui-bar">
+            	<div align="center">
+	            	<a href="#coursePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+	            	<a href="#welcomePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-iconpos="notext" style="float:left">Courses</a>
+                    <a href="#iResponderPage" data-role="button" data-icon="iButton" data-theme="b" data-iconpos="notext" style="margin-left:5px; float:left">iResponder</a>
+	                <h1 style="margin-top:15px">I'm Confused</h1>
+	                <a data-role="button" onclick="AT.refreshMessages('2'); return false" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh</a>
+                </div>
+            </div>
+
+            <div data-role="content" id="mContent2"> 
+                <div id="incomingMessages2" name="incomingMessages" class="msgContainerDiv" ></div>
+
+                <div id="confusedPopup" align="center" data-role="popup" data-overlay-theme="a" data-theme="e" data-dismissible="false" class="ui-content">
+                    <ul data-role="listview" data-icon="false" data-inset="true" data-divider-theme="e">
+                        <li data-role="list-divider" id="confusedHello" style="text-align:center" data-theme='a'>Hello, Student!</li>
+                        <li data-role="list-divider" style="text-align:center">Are you still Confused?</li>
+                        <li style="font-weight:normal"><a href="#engagedPage" data-transition="flip" data-direction="reverse" style='color:green; font-size:14px'>No, Return to Engaged.</a></li>
+                        <li style="font-weight:normal"><a href="#confusedPage" data-transition="flip" style='color:red; font-size:14px'>Yes, I'm asking/waiting for help.</a></li>
+                    </ul>
+                </div>
+                
+                <table id="messageInput2" style='width:100%'><tr>
+                    <td>
+                        <input type="text" data-clear-btn="true" id="messageText2" value = "" placeholder="New Message">
+                    </td>
+                    <td style='font-size:80%; width:1em'>
+                         <a data-role="button" id="sendMessageButton2" data-icon="check" data-theme="b" data-inline="true">Send</a>
+                    </td>
+                </tr></table>
+            </div>
+
+            <div data-role="footer" id="footer2" style="height:42px" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#engagedPage" data-transition="flip" data-direction="reverse">I'm Engaged<strong id="engagedCount2" style='float:right;'>0</strong></a></li>
+                        <li><a href="#boredPage" data-transition="flip" data-direction="reverse">I'm Bored<strong id="boredCount2" style='float:right;'>0</strong></a></li>
+                        <li><a href="#confusedPage" data-transition="flip" style='color:red;' class="ui-btn-active ui-state-persist">I'm Confused<strong id="confusedCount2" style='float:right;'>0</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div data-role="page" id="overviewPage">
+
+            <div data-role="header" id="header4" style='height:36px' data-position="fixed" class="ui-bar">
+                <div align="center">
+                    <a href="#coursePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+                    <a href="#welcomePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-iconpos="notext" style="float:left">Courses</a>
+                    <a href="#iResponderPage" data-role="button" data-icon="iButton" data-theme="b" data-iconpos="notext" style="margin-left:5px; float:left">iResponder</a>
+                    <h1 style="margin-top:15px">Lecture Overview!</h1>
+                    <a data-role="button" onclick="AT.refreshOverview(); return false" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh</a>
+                </div>
+            </div>
+
+            <div data-role="content" id="overviewContent" style='position: relative; left: 0; top: 0;'>
+                <div id="chartContainer" style='position: relative; top: 0; left: 0;'></div>
+            </div>
+
+            <div data-role="footer" id="footer4" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#overviewPage" data-transition="flip" class="ui-btn-active ui-state-persist">Overview</a></li>
+                        <li><a href="#ta-portalPage" data-transition="flip">Messages</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div data-role="page" id="iResponderPage">
+            <div data-role="header" id='iHeader' style='height:36px' data-position="fixed" class="ui-bar">
+                <div align="center">
+                    <a href="#coursePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+                    <a href="#welcomePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-iconpos="notext" style="float:left;">Courses</a>
+                    <a data-role="button" onclick="AT.exitiResponder(); return false" style="float:left; margin-left:5px;" data-icon="iButtonX" data-theme="b" data-iconpos="notext" data-inline="true">Exit Responder</a>
+                    <h1 style="margin-top:15px">iResponder</h1>
+                    <a data-role="button" onclick="AT.refreshiPanel(); return false" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh</a>
+                    <a href="#newIPopup" data-role="button" id="newiQuestionButton" data-rel="popup" data-iconpos="notext" style="float:right" data-icon="plus" data-theme="b">New iQuestion</a>
+                </div>
+            </div>
+
+            <div data-role="content" >
+                <ul data-role="listview" data-split-icon="check" data-inset="true" id="iQuestions" data-divider-theme="a"></ul>
+
+                <div data-role="popup" data-mini="true" style="width:100%; float:left" class="ui-content" data-transition="flip" id="summaryPopup" data-theme="a">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <fieldset class="ui-grid-a">
+                        <div data-mini="true" class="ui-block-a"><button id="summaryChart" data-theme="b">Summary Chart</button></div>
+                        <div data-mini="true" class="ui-block-b"><button id="summaryResponses" data-theme="b">Responses Summary</button></div>
+                    </fieldset>
+                    <div id="summaryChartContainer" style="width:100%;"></div>
+                    <ul data-role="listview" data-inset="true" id="summaryList" data-count-theme="b" data-divider-theme="a"></ul>
+                </div>
+
+                <div data-role="popup" id="iQuestionOptions" data-mini="true" data-transition="flip" style="width:280px; text-align:center;" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <div data-role="header" data-mini="true" class="ui-corner-top">
+                        <h1>iQuestion Options</h1>
+                    </div>
+                    <div data-role="content" data-mini="true" class="ui-corner-bottom ui-content">
+                    <form>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                            <label for="lockSlider">Allow Responses:</label>
+                            <select name="lockSlider" id="lockSlider" onchange="AT.toggleLock(this.value);" data-role="slider" data-mini="true">
+                                <option value="Off">Off</option>
+                                <option value="On" selected="">On</option>
+                            </select>
+                            </div>
+                            <div class="ui-block-b">
+                            <label for="answerSlider">Show Answer:</label>
+                            <select name="answerSlider" id="answerSlider" onchange="AT.toggleAnswer(this.value);" data-role="slider" data-mini="true">
+                                <option value="Off" selected="">Off</option>
+                                <option value="On">On</option>
+                            </select></div>
+                            <div class="ui-block-a">
+                        <a href="#" data-mini="true" data-role="button" data-theme="b" data-inline="true" data-icon="edit" title="Edit iQuestion" onclick="AT.iEdit();" data-transition="flip">Edit</a></div>
+                        <div class="ui-block-b">
+                        <a href="#" data-mini="true" title="Delete this iQuestion" onclick="AT.iDelete();" data-role="button" data-theme="e" data-inline="true" data-icon="delete" style="color:red" data-transition="flip">Delete</a></div></div>
+                        <div class="ui-grid-solo"><div class="ui-block-a">
+                        <a href="#" data-mini="true" title="Refresh iQuestions" data-role="button" data-theme="b" data-inline="true" data-icon="refresh" onclick="AT.refreshiPanel();" data-transition="flip">Refresh iQuestions List</a></div></div>
+                    </form>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="newIPopup" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div style="padding:10px 20px; text-align:center; z-index:10000;">
+                            <h3>New iQuestion</h3>
+                            <textarea cols="40" rows="8" data-clear-btn="true" name="question" id="question" value="" placeholder="Stated iQuestion" data-theme="a"></textarea>
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" name="answerRadion" id="answerRadio">
+                                <legend>Answer Type:</legend>
+                                    <input type="radio" name="answer-radios" id="radioYes-No" value="Yes-No">
+                                    <label for="radioYes-No">Yes/No</label>
+                                    <input type="radio" name="answer-radios11" id="radioTrue-False" value="True-False">
+                                    <label for="radioTrue-False">True/False</label>
+                                    <input type="radio" name="answer-radios" id="radioA-B" value="A-B">
+                                    <label for="radioA-B">A-B</label>
+                                    <input type="radio" name="answer-radios" id="radioA-C" value="A-C">
+                                    <label for="radioA-C">A-C</label>
+                                    <input type="radio" name="answer-radios" id="radioA-D" value="A-D">
+                                    <label for="radioA-D">A-D</label>
+                                    <input type="radio" name="answer-radios" id="radioA-E" value="A-E">
+                                    <label for="radioA-E">A-E</label>
+                                    <input type="radio" name="answer-radios" id="radioText" value="Text">
+                                    <label for="radioText">Text</label>
+                                    <input type="radio" name="answer-radios" id="radioNumeric" value="Numeric">
+                                    <label for="radioNumeric">Numeric</label>
+                            </fieldset>
+                            <fieldset class="ui-grid-a">
+                                <div class="ui-block-a main"><input type="password" data-clear-btn="true" name="answer" id="answer" value="" placeholder="Correct Answer: Eg. 'A'/'C'/'10.9'/'Lincoln'" data-theme="a"></div>
+                                <div class="ui-block-b side"><button data-icon="show" data-iconpos="notext" id="hideShow" onclick="AT.showHideAnswer('#answer','#hideShow'); return false" data-theme="b">Show/Hide Answer</button></div>
+                            </fieldset>
+                            
+                            <textarea cols="40" rows="8" data-clear-btn="true" name="hints" id="hints" value="" placeholder="Answer Options/Hints: Eg. 'A: Isaac Newton, B:'" data-theme="a"></textarea>
+                            <button id="createiQuestion" data-theme="b" data-icon="check">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div data-role="popup" id="editIPopup" data-theme="a" class="ui-corner-all">
+                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+                    <form>
+                        <div style="padding:10px 20px; text-align:center; z-index:10000;">
+                            <h3>Edit iQuestion</h3>
+                            <textarea cols="40" rows="8" data-clear-btn="true" name="question" id="question11" value="" data-clear-btn="true" placeholder="Stated iQuestion" data-theme="a"></textarea>
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" name="answerRadio11" id="answerRadio11">
+                                <legend>Answer Type:</legend>
+                                    <input type="radio" name="answer-radios11" id="radioYes-No11" value="Yes-No">
+                                    <label for="radioYes-No11">Yes/No</label>
+                                    <input type="radio" name="answer-radios11" id="radioTrue-False11" value="True-False">
+                                    <label for="radioTrue-False11">True/False</label>
+                                    <input type="radio" name="answer-radios11" id="radioA-B11" value="A-B">
+                                    <label for="radioA-B11">A-B</label>
+                                    <input type="radio" name="answer-radios11" id="radioA-C11" value="A-C">
+                                    <label for="radioA-C11">A-C</label>
+                                    <input type="radio" name="answer-radios11" id="radioA-D11" value="A-D">
+                                    <label for="radioA-D11">A-D</label>
+                                    <input type="radio" name="answer-radios11" id="radioA-E11" value="A-E">
+                                    <label for="radioA-E11">A-E</label>
+                                    <input type="radio" name="answer-radios11" id="radioText11" value="Text">
+                                    <label for="radioText11">Text</label>
+                                    <input type="radio" name="answer-radios11" id="radioNumeric11" value="Numeric">
+                                    <label for="radioNumeric11">Numeric</label>
+                            </fieldset>
+                            <fieldset class="ui-grid-a">
+                                <div class="ui-block-a main"><input type="password" data-clear-btn="true" name="answer11" id="answer11" value="" placeholder="Correct Answer: Eg. 'A'/'C'/'10.9'/'Lincoln'" data-theme="a"></div>
+                                <div class="ui-block-b side"><button data-icon="show" data-iconpos="notext" id="hideShow11" onclick="AT.showHideAnswer('#answer11','#hideShow11'); return false" data-theme="b">Show/Hide Answer</button></div>
+                            </fieldset>
+                            <textarea cols="40" rows="8" data-clear-btn="true" name="hints11" id="hints11" value="" placeholder="Answer Options/Hints: Eg. 'A: Isaac Newton, B:'" data-theme="a"></textarea>
+                            <button id="editiQuestion" data-theme="b" data-icon="check">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a data-role="button" onclick="AT.exitiResponder(); return false" data-icon="iButtonX">Exit iResponder</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div data-role="page" id="ta-portalPage">
+            <div data-role="header" id="header" style='height:36px' data-position="fixed" class="ui-bar">
+            	<div align="center">
+	            	<a href="#coursePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="bars" data-theme="b" data-iconpos="notext" style="float:left" data-inline="true">Lectures</a>
+	            	<a href="#welcomePage" data-transition="flip" data-role="button" data-direction="reverse" data-icon="home" data-theme="b" data-iconpos="notext" style="float:left">Courses</a>
+                    <a href="#iResponderPage" data-role="button" data-icon="iButton" data-theme="b" data-iconpos="notext" style="margin-left:5px; float:left">iResponder</a>
+	                <h1 style="margin-top:15px">Messages</h1>
+	                <a data-role="button" onclick="AT.refreshMessages('4'); return false" data-icon="refresh" data-theme="b" data-iconpos="notext" style="float:right; margin-right:30px" data-inline="true">Refresh</a>
+                </div>
+            </div>
+
+            <div data-role="content" id="mContent"> 
+                <div id="incomingMessages4" name="incomingMessages" class="msgContainerDiv" >
+                    <div data-role="collapsible-set" id="postsCollapsibleSet" data-mini="true">
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <div data-role="footer" id="footer" style='height:36px'data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#overviewPage" data-transition="flip" data-direction="reverse">Overview
+                        	<strong id="confusedCount4" style='color:red; float:right; margin-top:0px;'></strong>
+                        	<strong style='float:right; margin-top:0px;'> : </strong>
+                        	<strong id="boredCount4" style='color:yellow; margin-top:0px; float:right;'></strong>
+                        	<strong style='float:right;'> : </strong>
+                        	<strong id="engagedCount4" style='color:#01DF3A; float:right;'></strong>
+                        </a></li>
+                        <li><a href="#ta-portalPage" data-transition="flip" class="ui-btn-active ui-state-persist">Messages</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script id="courseTemplate" type="text/x-jquery-tmpl">  
+        <li ><a style="padding-top:5px; padding-bottom:10px;" id=${id}> 
+           <h3>${courseTitle}</h3>
+           <p><strong>${courseNumber}</strong> : ${semester}</p>
+           <p>${school} : ${pins}</p>
+           <p class="ui-li-aside">Lectures: <strong>${lecture_count}</strong></p>
+           </a>
+           <a href="#deleteLecture" id1=${id} data-rel="popup" data-icon="gear" data-position-to="window" data-transition="flip">Lecture Options</a>
+    </script>
+
+    <script id="nowlectureTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:5px; padding-bottom:10px;" id=${id}> 
+           <h3>${lectureTitle}</h3>
+           <p><strong>Time: On ${startTime} Duration:${duration}</strong></p>
+           <p>${info}</p>
+           <p class = "ui-li-aside now"><strong>On Now</strong></p>
+           </a>
+        </li>
+    </script>
+
+    <script id="anowlectureTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:5px; padding-bottom:10px;" id=${id}>
+           <h3>${lectureTitle}</h3>
+           <p><strong>Time: On ${startTime} Duration:${duration}</strong></p>
+           <p>${info}</p>
+           <p class = "ui-li-aside now"><strong>On Now</strong></p>
+           </a>
+           <a href="#deleteLecture" id1=${id} data-rel="popup" data-icon="gear" data-position-to="window" data-transition="flip">Lecture Options</a>
+        </li>
+    </script>
+
+    <script id="passedlectureTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:5px; padding-bottom:10px;" id=${id}> 
+           <h3>${lectureTitle}</h3>
+           <p><strong>Time: On ${startTime} Duration:${duration}</strong></p>
+           <p>${info}</p>
+           <p class = "ui-li-aside passed"><strong>Completed</strong></p>
+           </a>
+        </li>
+    </script>
+    <script id="apassedlectureTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:5px; padding-bottom:10px;" id=${id}> 
+           <h3>${lectureTitle}</h3>
+           <p><strong>Time: On ${startTime} Duration:${duration}</strong></p>
+           <p>${info}</p>
+           <p class = "ui-li-aside passed"><strong>Completed</strong></p>
+           </a>
+           <a href="#deleteLecture" id1=${id} data-rel="popup" data-icon="gear" data-position-to="window" data-transition="flip">Lecture Options</a>
+        </li>
+    </script>
+
+    <script id="scheduledlectureTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:5px; padding-bottom:10px;" id=${id}>
+           <h3>${lectureTitle}</h3>
+           <p><strong>Time: On ${startTime} Duration:${duration}</strong></p>
+           <p>${info}</p>
+           <p class = "ui-li-aside scheduled"><strong>Scheduled</strong></p>
+           </a>
+        </li>
+    </script>
+    <script id="ascheduledlectureTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:5px; padding-bottom:10px;" id=${id}>
+           <h3>${lectureTitle}</h3>
+           <p><strong>Time: On ${startTime} Duration:${duration}</strong></p>
+           <p>${info}</p>
+           <p class = "ui-li-aside scheduled"><strong>Scheduled</strong></p>
+           </a>
+           <a href="#deleteLecture" id1=${id} data-rel="popup" data-icon="gear" data-position-to="window" data-transition="flip">Lecture Options</a>
+        </li>
+    </script>
+
+
+
+    <script id="ASiTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:0px; padding-bottom:0px;" id=${id}>
+           <h3>${qn}</h3>
+           <p>Hints: <strong>${hints}</strong></p>
+           <textarea style="padding-top:0px; padding-bottom:0px;" data-clear-btn="true" cols="80" rows="1" name="answer" id="answer" data-theme="a">${answer}</textarea>
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p>
+           </a>
+           <a href="#" id1=${id1} id="submitiButton" data-rel="popup" data-role="button" data-icon="check" >Submit Answer</a>
+        </li>
+    </script>
+    <script id="ASiTemplateYN" type="text/x-jquery-tmpl">  
+        <li style="padding-top:0px; padding-bottom:0px;"><h3 style="margin-top:0px;">${qn}</h3><p>Hints: <strong>${hints}</strong></p>
+           <div data-role="fieldcontain">
+                <select name="selectAnswer" id=${id} onchange="AT.submitAnswer(this.value,this.id)">
+                    <option value="choose">Pick Answer!</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select> ${answer}</div>
+
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p></li>
+    </script>
+    <script id="ASiTemplateTF" type="text/x-jquery-tmpl">  
+        <li style="padding-top:0px; padding-bottom:0px;"><h3 style="margin-top:0px;">${qn}</h3><p>Hints: <strong>${hints}</strong></p>
+           <div data-role="fieldcontain">
+                <select name="selectAnswer" id=${id} onchange="AT.submitAnswer(this.value,this.id)">
+                    <option value="choose">Pick Answer!</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select> ${answer}</div>
+
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p></li>
+    </script>
+    <script id="ASiTemplateA-B" type="text/x-jquery-tmpl">  
+        <li style="padding-top:0px; padding-bottom:0px;"><h3 style="margin-top:0px;">${qn}</h3><p>Hints: <strong>${hints}</strong></p>
+           <div data-role="fieldcontain">
+                <select name="selectAnswer" id=${id} onchange="AT.submitAnswer(this.value,this.id)">
+                    <option value="choose">Pick Answer!</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select> ${answer}</div>
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p></li>
+    </script>
+    <script id="ASiTemplateA-C" type="text/x-jquery-tmpl">  
+        <li style="padding-top:0px; padding-bottom:0px;"><h3 style="margin-top:0px;">${qn}</h3><p>Hints: <strong>${hints}</strong></p>
+           <div data-role="fieldcontain">
+                <select name="selectAnswer" id=${id} onchange="AT.submitAnswer(this.value,this.id)">
+                    <option value="choose">Pick Answer!</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select> ${answer}</div>
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p></li>
+    </script>
+    <script id="ASiTemplateA-D" type="text/x-jquery-tmpl">  
+        <li style="padding-top:0px; padding-bottom:0px;"><h3 style="margin-top:0px;">${qn}</h3><p>Hints: <strong>${hints}</strong></p>
+           <div data-role="fieldcontain">
+                <select name="selectAnswer" id=${id} onchange="AT.submitAnswer(this.value,this.id)">
+                    <option value="choose">Pick Answer!</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select> ${answer}</div>
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p></li>
+    </script>
+    <script id="ASiTemplateA-E" type="text/x-jquery-tmpl">  
+        <li style="padding-top:0px; padding-bottom:0px;"><h3 style="margin-top:0px;">${qn}</h3><p>Hints: <strong>${hints}</strong></p>
+           <div data-role="fieldcontain">
+                <select name="selectAnswer" id=${id} onchange="AT.submitAnswer(this.value,this.id)">
+                    <option value="choose">Pick Answer!</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                </select> ${answer}</div>
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p></li>
+    </script>
+
+    <script id="ISiTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:0px; padding-bottom:0px;" title="Click to See Response Summaries" active=false id=${id} title="Click to visualize full summary">
+           <h3>${qn}</h3>
+           <p>Your Answer: <strong>${answer}</strong>; Correct Answer: <strong>${correct_answer}</strong></p>
+           <p>Summary: <strong>${summary}</strong></p>
+           <p class = "ui-li-aside passed">Responses: <strong>${responses}</strong></p>
+           </a>
+        </li>
+    </script>
+    <script id="IAiTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:0px; padding-bottom:0px;" title="Click to See Response Summaries"  active=false id=${id} title="Click to visualize full summary">
+           <h3>${qn}</h3>
+           <p>Correct Answer: <strong>${correct_answer}</strong></p>
+           <p>Summary: <strong>${summary}</strong></p>
+           <p class = "ui-li-aside passed">Responses: <strong>${responses}</strong></p>
+           </a>
+           <a id=${id} data-role="button" data-rel="popup" data-icon="gear" >iQuestion Options</a>
+        </li>
+    </script>
+    <script id="AAiTemplate" type="text/x-jquery-tmpl">  
+        <li><a style="padding-top:0px; padding-bottom:0px;" title="Click to See Response Summaries"  id=${id}>
+           <h3 id='iQHeading'>${qn}</h3>
+           <p>Hints: <strong>${hints}</strong></p>
+           <p>Correct Answer: <strong>${correct_answer}</strong></p>
+           <p class = "ui-li-aside now">Responses: <strong>${responses}</strong></p>
+           </a>
+           <a id=${id} data-role="button" data-rel="popup" data-icon="gear" >iQuestion Options</a>
+        </li>
+    </script>
+
+    <script id='uresolvedOwner' type='text/x-jquery-tmpl'>  
+        <div data-role='collapsible' id=${collapsible_id} data-theme='a' data-collapsed-icon='alert' data-expanded-icon='arrow-u'>
+            <h2>${topic}
+                <span style='float:right;' class='button-span'> <input type='button' value='Resolved' id=${id} data-mini='true' onclick='AT.toggleResolved(event,this.id,'Resolved'); return false' data-inline='true' data-icon='check' data-icon-pos='top'/>
+                </span>
+                <span class='ui-btn-up-c' title='Responses' style='float:right;'>${responses}</span>
+            </h2>
+            <ul data-role='listview' id=${listview_id}>
+                <li class='ui-body ui-body-b'>
+                    <fieldset class='ui-grid-a'>
+                        <div class='ui-block-a main'><textarea rows='0' id=${response_id} value='' placeholder='New Response' data-theme='c'></textarea></div>
+                        <div class='ui-block-b side'><button id={id} data-icon='check' data-iconpos='notext' onclick='AT.submitResponse(this.id); return false' data-theme='b'>Submit Response</button></div>
+                    </fieldset>
+                </li>
+            </ul>
+        </div>
+    </script>
+
+
+</html>
+
